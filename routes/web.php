@@ -12,12 +12,37 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return redirect('login');
 });
 
-Route::get('ibeacon','iBeacon_guidance@index');
-Route::post('ibeacon','iBeacon_guidance@create');
-Route::put('ibeacon/{id}','iBeacon_guidance@update');
-Route::delete('ibeacon/{id}','iBeacon_guidance@delete');
-Route::get('ibeacon/{id}','iBeacon_guidance@ajax_getData');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('ibeacon','iBeacon_guidance@index');
+    Route::post('ibeacon','iBeacon_guidance@create');
+    Route::patch('ibeacon/{id}','iBeacon_guidance@update');
+    Route::delete('ibeacon/{id}','iBeacon_guidance@delete');
+    Route::get('ibeacon/{id}','iBeacon_guidance@ajax_getData');
+    Route::get('users','UserController@index');
+    Route::post('users','UserController@create');
+    Route::patch('users/{id}','UserController@update');
+    Route::delete('users/{id}', 'UserController@delete');
+    Route::patch('users/password/{id}','UserController@reset_password');
+    Route::get('users/{id}','UserController@ajax_get_data');
+    Route::get('website','WebinfoController@getWebinfo');
+    Route::patch('website','WebinfoController@update');
+});
+/*
+Route::get('home',function(){
+    return redirect('users');
+});
+*/
+Route::post('login','AuthController@auth');
+Route::get('login','AuthController@login');
+Route::get('logout','AuthController@logout');
+
+
+
+
+
+
 

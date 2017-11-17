@@ -2,14 +2,14 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>iBeacon導覽系統</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <title>{{ $title }}－iBeacon推撥管理</title>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
-        <script type="text/javascript" src="https://unpkg.com/vue"></script> 
+        <script type="text/javascript" src="{{ asset('js/jquery.validate.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/vue.min.js') }}"></script> 
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <style>
             body{
@@ -19,6 +19,9 @@
         </style>
     </head>
     <body>
+        @section('navbar')
+          @include('nav.adminnav',['title' => $title])
+        @show
         <script type="text/javascipt">var location_name = NULL;</script>
         <div class="modal" tabindex="-1" role="dialog" id="createData">
         <div class="modal-dialog" role="document">
@@ -64,7 +67,7 @@
             <form id="updateform">
             <div class="modal-body">
                 <input type="hidden" name="id">
-                <input name="_method" type="hidden" value="PUT">
+                <input name="_method" type="hidden" value="patch">
                 <label for="name">地區名稱(必要)</label>
                 <input type="text" name="name" class="form-control" value="2"><br>
                 <label for="title">通知標題(必要/用於裝置端通知標題欄)</label>
@@ -145,6 +148,7 @@
                             </tr>
                             @endforeach
                         </table>
+                        {{ $result->links() }}
                     </div>
                 </div>
                 <div class="col-md-2"></div>

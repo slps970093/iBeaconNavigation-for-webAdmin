@@ -9,6 +9,6 @@ class web_info extends Model
     //
     protected $table="web_info";
     protected $fillable=[
-        'web_title'
+        'title'
     ];
 }

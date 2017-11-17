@@ -9,13 +9,15 @@ use Illuminate\Http\Request;
 use App\Http\Requests\iBeaconguidanceCreate as iBeaconCreate;
 use App\Http\Requests\iBeaconguidanceUpdate as iBeaconUpdate;
 use App\iBeacon_guidance as iBeaconEloquent;
+use App\web_info as WebinfoEloquent;
 use View;
 class iBeacon_guidance extends Controller
 {
     public function index(){
-        $result = iBeaconEloquent::all();
+        $web_data = WebinfoEloquent::find(1);
+        $result = iBeaconEloquent::paginate(8);
         //https://www.codecasts.com/blog/post/programming-with-laravel-5-blade-views-with-var
-        return view('iBeacon_admin/index')->with('result',$result);
+        return view('iBeacon_admin/index',['result' => $result,'title' => $web_data->title]);
     }
     public function create(iBeaconCreate $request){
         $result = iBeaconEloquent::create(array(
