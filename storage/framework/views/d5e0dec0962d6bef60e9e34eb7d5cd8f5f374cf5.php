@@ -49,6 +49,12 @@
                 <input type="text" name="mac_address" class="form-control"><br>
                 <label for="link">介紹網址(必要)</label>
                 <input type="text" name="link" class="form-control"><br>
+                <label for="UUID">UUID(必要)</label>
+                <input type="text" name="UUID" class="form-control"><br>
+                <label for="Major_ID">Major ID</label>
+                <input type="text" name="Major_ID" class="form-control"><br>
+                <label for="Minor_ID">Minor ID</label>
+                <input type="text" name="Minor_ID" class="form-control"><br>
             </div>
             <div class="modal-footer">
                 <!--
@@ -83,6 +89,12 @@
                 <input type="text" name="mac_address" class="form-control"><br>
                 <label for="link">介紹網址(必要)</label>
                 <input type="text" name="link" class="form-control"><br>
+                <label for="UUID">UUID(必要)</label>
+                <input type="text" name="UUID" class="form-control"><br>
+                <label for="Major_ID">Major ID</label>
+                <input type="text" name="Major_ID" class="form-control"><br>
+                <label for="Minor_ID">Minor ID</label>
+                <input type="text" name="Minor_ID" class="form-control"><br>
             </div>
             <div class="modal-footer">
                 <!--
@@ -170,7 +182,7 @@
                             </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </table>
-                        <?php echo e($result->links()); ?>
+                        <?php echo e($result->links('vendor/pagination/bootstrap-4')); ?>
 
                     </div>
                 </div>
@@ -231,7 +243,7 @@
                 setTimeout("location.reload();",5*1000);
             },
             error:function(){
-                alert("資料新增失敗，請在試一次！");
+                alert("資料新增失敗或Beacon已存在，請在試一次！");
                 location.reload();
             }
         })
@@ -252,7 +264,7 @@
                 setTimeout("location.reload();",5*1000);
             },
             error:function(){
-                alert("資料更新失敗，請在試一次！");
+                alert("資料更新失敗或Beacon已存在，請在試一次！");
                 location.reload();
             }
         })
@@ -291,12 +303,14 @@
                 name: "required",
                 title: "required",
                 mac_address: "required",
-                link: "required"
+                link: "required",
+                UUID: "required"
             },messages:{
                 name: "重要資訊請務必填寫",
                 title: "重要資訊請務必填寫",
                 mac_address: "重要資訊請務必填寫",
-                link: "重要資訊請務必填寫"
+                link: "重要資訊請務必填寫",
+                UUID: "重要資訊請務必填寫"
             }
         });
     }
@@ -315,12 +329,14 @@
                 name: "required",
                 title: "required",
                 mac_address: "required",
-                link: "required"
+                link: "required",
+                UUID: "required"
             },messages:{
                 name: "重要資訊請務必填寫",
                 title: "重要資訊請務必填寫",
                 mac_address: "重要資訊請務必填寫",
-                link: "重要資訊請務必填寫"
+                link: "重要資訊請務必填寫",
+                UUID: "重要資訊請務必填寫"
             }
         });
     }
@@ -355,6 +371,9 @@
                 $("input[name=content]").val(json[0]['content']);
                 $("input[name=mac_address]").val(json[0]['mac_address']);
                 $("input[name=link]").val(json[0]['link']);
+                $("input[name=UUID]").val(json[0]['UUID']);
+                $("input[name=Major_ID]").val(json[0]['Major_ID']);
+                $("input[name=Minor_ID]").val(json[0]['Minor_ID']);
                 if(web_action == 'delete'){
                     Vue.set(deleteView,'location_name',json[0]['name']);
                     Vue.set(deleteView,'mac_address',json[0]['mac_address']);
@@ -374,5 +393,8 @@
         $("input[name=content]").val("");
         $("input[name=mac_address]").val("");
         $("input[name=link]").val("");
+        $("input[name=UUID]").val("");
+        $("input[name=Major_ID]").val("");
+        $("input[name=Minor_ID]").val("");
     }
 </script>

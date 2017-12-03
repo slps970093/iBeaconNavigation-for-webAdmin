@@ -1,14 +1,14 @@
 <?php
 
-namespace iBeaconProject\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use iBeaconProject\User as UserEloquent;
-use iBeaconProject\web_info as WebinfoEloquent;
+use App\User as UserEloquent;
+use App\web_info as WebinfoEloquent;
 use Illuminate\Http\Request;
-use iBeaconProject\Http\Requests\UserCreate as UserCreate;
-use iBeaconProject\Http\Requests\UserUpdate as UserUpdate;
+use App\Http\Requests\UserCreate as UserCreate;
+use App\Http\Requests\UserUpdate as UserUpdate;
 
 
 class UserController extends Controller{

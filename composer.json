@@ -24,7 +24,7 @@
             "database/factories"
         ],
         "psr-4": {
-            "iBeaconProject\\": "app/"
+            "App\\": "app/"
         }
     },
     "autoload-dev": {

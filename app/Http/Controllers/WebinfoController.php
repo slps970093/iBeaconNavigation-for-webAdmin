@@ -1,10 +1,10 @@
 <?php
 
-namespace iBeaconProject\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use iBeaconProject\web_info as WebinfoEloquent;
+use App\web_info as WebinfoEloquent;
 
 class WebinfoController extends Controller
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace iBeaconProject\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use iBeaconProject\Http\Requests\LoginRequest  as LoginRequest;
-use iBeaconProject\web_info as WebinfoEloquent;
-use iBeaconProject\User as UserEloquent;
+use App\Http\Requests\LoginRequest  as LoginRequest;
+use App\web_info as WebinfoEloquent;
+use App\User as UserEloquent;
 use Auth;
 use Redirect;
 class AuthController extends Controller

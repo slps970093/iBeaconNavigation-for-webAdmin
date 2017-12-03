@@ -1,6 +1,6 @@
 <?php
 
-namespace iBeaconProject\Http\Requests;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -27,7 +27,8 @@ class iBeaconguidanceCreate extends FormRequest
             'name' => 'required',
             'title' => 'required',
             'mac_address' => 'required',
-            'link' => 'required'
+            'link' => 'required',
+            'UUID' => 'required'
         ];
     }
 }

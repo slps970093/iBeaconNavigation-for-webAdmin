@@ -1,60 +1,75 @@
 <?php
 
-namespace iBeaconProject\Http\Controllers;
+namespace App\Http\Controllers;
 
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use iBeaconProject\Http\Requests\iBeaconguidanceCreate as iBeaconCreate;
-use iBeaconProject\Http\Requests\iBeaconguidanceUpdate as iBeaconUpdate;
-use iBeaconProject\iBeacon_guidance as iBeaconEloquent;
-use iBeaconProject\web_info as WebinfoEloquent;
+use App\Http\Requests\iBeaconguidanceCreate as iBeaconCreate;
+use App\Http\Requests\iBeaconguidanceUpdate as iBeaconUpdate;
+use App\iBeacon_guidance as iBeaconEloquent;
+use App\web_info as WebinfoEloquent;
 use View;
 class iBeacon_guidance extends Controller
 {
     public function index(){
         $web_data = WebinfoEloquent::find(1);
-        $result = iBeaconEloquent::paginate(8);
+        $result = iBeaconEloquent::paginate(10);
         //https://www.codecasts.com/blog/post/programming-with-laravel-5-blade-views-with-var
         return view('iBeacon_admin/index',['result' => $result,'title' => $web_data->title]);
     }
     public function create(iBeaconCreate $request){
-        $result = iBeaconEloquent::create(array(
-            'name' => htmlspecialchars($request->name),
-            'mac_address' => htmlspecialchars($request->mac_address),
-            'title' => htmlspecialchars($request->title),
-            'content' => htmlspecialchars($request->content),
-            'link' => htmlspecialchars($request->link)
-        ));
-        if($result){
-            http_response_code(201);
-            return response()->json(['status' => true]);
-        }else{
-            http_response_code(400);
-            return response()->json(['status' => false]);
+        $count = iBeaconEloquent::where('mac_address','=',$request->mac_address)->count();
+        if($count == 0){
+            $result = iBeaconEloquent::create(array(
+                'name' => htmlspecialchars($request->name),
+                'mac_address' => htmlspecialchars($request->mac_address),
+                'title' => htmlspecialchars($request->title),
+                'content' => htmlspecialchars($request->content),
+                'link' => htmlspecialchars($request->link),
+                'UUID' => htmlspecialchars($request->UUID),
+                'Major_ID' => htmlspecialchars($request->Major_ID),
+                'Minor_ID' => htmlspecialchars($request->Minor_ID)
+            ));
+            if($result){
+                return response()->json(['status' => true],201);
+            }
         }
+        return response()->json(['status' => false],400);
     }
     public function update(iBeaconUpdate $request,$id){
         if(is_numeric($id)){
+            $exist = true;
             $result = iBeaconEloquent::find($id);
-            $result->name = htmlspecialchars($request->name);
-            $result->mac_address = htmlspecialchars($request->mac_address);
-            $result->title = htmlspecialchars($request->title);
-            $result->content = htmlspecialchars($request->content);
-            $result->link = htmlspecialchars($request->link);
-            $result->save();
-            if($result){
-                http_response_code(201);
-                return response()->json(['status' => true]);
+            if($result->mac_address == $request->mac_address){
+                $exist = true;
             }else{
-                http_response_code(400);
-                return response()->json(['status' => false]);
+                // check beacon mac address isn't exist
+                $count = iBeaconEloquent::where('mac_address','=',$request->mac_address)->count();
+                if($count == 0){
+                    $exist = false;
+                }else{
+                    $exist = true;
+                }
             }
-        }else{
-            http_response_code(400);
-            return response()->json(['status' => false]);
+            if(!$exist){
+                $result = iBeaconEloquent::find($id);
+                $result->name = htmlspecialchars($request->name);
+                $result->mac_address = htmlspecialchars($request->mac_address);
+                $result->title = htmlspecialchars($request->title);
+                $result->content = htmlspecialchars($request->content);
+                $result->link = htmlspecialchars($request->link);
+                $result->UUID = htmlspecialchars($request->UUID);
+                $result->Major_ID = htmlspecialchars($request->Major_ID);
+                $result->Minor_ID = htmlspecialchars($request->Minor_ID);
+                $result->save();
+                if($result){
+                    return response()->json(['status' => true],201);
+                }
+            }
         }
+        return response()->json(['status' => false],400);
     }
     public function ajax_getData($id){
         if(is_numeric($id) && !is_null($id)){
@@ -65,7 +80,10 @@ class iBeacon_guidance extends Controller
                 'mac_address' => $result->mac_address,
                 'link' => $result->link,
                 'title' => $result->title,
-                'content' => $result->content
+                'content' => $result->content,
+                'UUID' => $result->UUID,
+                'Major_ID' => $result->Major_ID,
+                'Minor_ID' => $result->Minor_ID
             );
             return response()->json($data,200);
         }
@@ -93,6 +111,9 @@ class iBeacon_guidance extends Controller
             $data[$tmp]['link'] = $row->link;
             $data[$tmp]['title'] = $row->title;
             $data[$tmp]['content'] = $row->content;
+            $data[$tmp]['UUID'] = $row->UUID;
+            $data[$tmp]['Major_ID'] = $row->Major_ID;
+            $data[$tmp]['Minor_ID'] = $row->Minor_ID;
             $tmp++;
         }
         http_response_code(200);

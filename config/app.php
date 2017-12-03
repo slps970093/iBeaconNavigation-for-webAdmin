@@ -172,11 +172,11 @@ return [
         /*
          * Application Service Providers...
          */
-        iBeaconProject\Providers\AppServiceProvider::class,
-        iBeaconProject\Providers\AuthServiceProvider::class,
-        // iBeaconProject\Providers\BroadcastServiceProvider::class,
-        iBeaconProject\Providers\EventServiceProvider::class,
-        iBeaconProject\Providers\RouteServiceProvider::class,
+        App\Providers\AppServiceProvider::class,
+        App\Providers\AuthServiceProvider::class,
+        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\EventServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,
 
     ],
 

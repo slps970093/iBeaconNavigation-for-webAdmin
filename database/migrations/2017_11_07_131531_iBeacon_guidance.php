@@ -17,6 +17,9 @@ class IBeaconGuidance extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('mac_address');
+            $table->string('UUID');
+            $table->string('Major_ID')->nullable();
+            $table->string('Minor_ID')->nullable();
             $table->string('link');
             $table->string('title');
             $table->string('content')->nullable();

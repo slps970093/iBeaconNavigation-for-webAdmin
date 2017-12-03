@@ -28,10 +28,10 @@
     24 => 'Barryvdh\\Debugbar\\ServiceProvider',
     25 => 'Mews\\Purifier\\PurifierServiceProvider',
     26 => 'Mews\\Purifier\\PurifierServiceProvider',
-    27 => 'iBeaconProject\\Providers\\AppServiceProvider',
-    28 => 'iBeaconProject\\Providers\\AuthServiceProvider',
-    29 => 'iBeaconProject\\Providers\\EventServiceProvider',
-    30 => 'iBeaconProject\\Providers\\RouteServiceProvider',
+    27 => 'App\\Providers\\AppServiceProvider',
+    28 => 'App\\Providers\\AuthServiceProvider',
+    29 => 'App\\Providers\\EventServiceProvider',
+    30 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -47,10 +47,10 @@
     9 => 'Illuminate\\View\\ViewServiceProvider',
     10 => 'Fideloper\\Proxy\\TrustedProxyServiceProvider',
     11 => 'Barryvdh\\Debugbar\\ServiceProvider',
-    12 => 'iBeaconProject\\Providers\\AppServiceProvider',
-    13 => 'iBeaconProject\\Providers\\AuthServiceProvider',
-    14 => 'iBeaconProject\\Providers\\EventServiceProvider',
-    15 => 'iBeaconProject\\Providers\\RouteServiceProvider',
+    12 => 'App\\Providers\\AppServiceProvider',
+    13 => 'App\\Providers\\AuthServiceProvider',
+    14 => 'App\\Providers\\EventServiceProvider',
+    15 => 'App\\Providers\\RouteServiceProvider',
   ),
   'deferred' => 
   array (
