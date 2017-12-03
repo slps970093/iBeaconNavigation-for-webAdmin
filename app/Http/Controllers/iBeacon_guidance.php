@@ -43,7 +43,7 @@ class iBeacon_guidance extends Controller
             $exist = true;
             $result = iBeaconEloquent::find($id);
             if($result->mac_address == $request->mac_address){
-                $exist = true;
+                $exist = false;
             }else{
                 // check beacon mac address isn't exist
                 $count = iBeaconEloquent::where('mac_address','=',$request->mac_address)->count();
